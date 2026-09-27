@@ -18,6 +18,6 @@ def generate_workout_gemini(age, weight, goal, intensity):
     prompt = f"Create a 7-day fitness plan for Age {age}, Weight {weight}, Goal {goal}, Intensity {intensity}. Include Warm-up, Workout, Diet."
     return _call_gemini(prompt)
 
-def generate_nutrition_tip_with_flash(goal):
-    prompt = f"Give a short nutrition tip for fitness goal: {goal}"
+def generate_nutrition_tip_with_flash(age, weight, goal, intensity):
+    prompt = f"Give a short nutrition tip for a person age {age}, weight {weight}, goal {goal}, workout intensity {intensity}. Keep it in short in 2 lines."
     return _call_gemini(prompt)
