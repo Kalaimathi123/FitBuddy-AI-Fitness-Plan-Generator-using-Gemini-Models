@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitBuddy - AI Workout Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(rgba(10,10,10,0.75), rgba(10,10,10,0.85)),
+                  url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      padding: 20px;
+    }
+    .card {
+      background: rgba(20, 20, 20, 0.9);
+      border-radius: 16px;
+      padding: 40px;
+      width: 100%;
+      max-width: 480px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      color: #f5f5f5;
+    }
+    h1 {
+      text-align: center;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+      color: #ff5a3c;
+    }
+    p.subtitle {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 24px;
+      color: #bbb;
+      font-size: 14px;
+    }
+    label {
+      display: block;
+      margin-top: 16px;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #ddd;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid #444;
+      background: #1e1e1e;
+      color: #fff;
+      font-size: 14px;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #ff5a3c;
+    }
+    button {
+      width: 100%;
+      margin-top: 28px;
+      padding: 14px;
+      border: none;
+      border-radius: 30px;
+      background: #ff5a3c;
+      color: #fff;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.1s ease;
+    }
+    button:hover {
+      background: #e0492e;
+      transform: translateY(-1px);
+    }
+    .admin-link {
+      display: block;
+      text-align: center;
+      margin-top: 18px;
+      font-size: 13px;
+      color: #999;
+      text-decoration: none;
+    }
+    .admin-link:hover { color: #ff5a3c; }
+    @media (max-width: 480px) {
+      .card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>FitBuddy</h1>
+    <p class="subtitle">AI-Powered Fitness Plan Generator</p>
+
+    <form action="/generate-workout" method="post">
+      <label for="username">Name</label>
+      <input type="text" id="username" name="username" placeholder="e.g. Alex Johnson" required />
+
+      <label for="user_id">User ID</label>
+      <input type="text" id="user_id" name="user_id" placeholder="e.g. alex01" required />
+
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" min="10" max="100" placeholder="e.g. 28" required />
+
+      <label for="weight">Weight (kg)</label>
+      <input type="number" id="weight" name="weight" min="20" max="300" placeholder="e.g. 70" required />
+
+      <label for="goal">Fitness Goal</label>
+      <select id="goal" name="goal" required>
+        <option value="" disabled selected>Select your goal</option>
+        <option value="weight loss">Weight Loss</option>
+        <option value="muscle gain">Muscle Gain</option>
+        <option value="general wellness">General Wellness</option>
+        <option value="flexibility">Flexibility</option>
+        <option value="endurance">Endurance</option>
+      </select>
+
+      <label for="intensity">Workout Intensity</label>
+      <select id="intensity" name="intensity" required>
+        <option value="" disabled selected>Select intensity</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+
+      <button type="submit">Generate Plan</button>
+    </form>
+
+    <a class="admin-link" href="/view-all-users">View all users (admin) &rarr;</a>
+  </div>
+</body>
+</html>

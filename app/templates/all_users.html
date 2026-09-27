@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All Users - FitBuddy Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #0f0f0f;
+      color: #f0f0f0;
+      padding: 30px 16px 60px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; }
+    h1 { color: #ff5a3c; font-weight: 900; margin-bottom: 4px; }
+    .back-link { color: #999; text-decoration: none; font-size: 13px; }
+    .back-link:hover { color: #ff5a3c; }
+
+    .table-wrap {
+      margin-top: 24px;
+      overflow-x: auto;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1a1a1a;
+      font-size: 13.5px;
+      min-width: 900px;
+    }
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    th {
+      background: #222;
+      color: #ff5a3c;
+      position: sticky;
+      top: 0;
+    }
+    tr:hover { background: #202020; }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: inherit;
+      margin: 0;
+      max-height: 160px;
+      overflow-y: auto;
+      font-size: 12.5px;
+      color: #ddd;
+    }
+    .empty {
+      margin-top: 30px;
+      color: #999;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>All Users</h1>
+    <a class="back-link" href="/">&larr; Back to form</a>
+
+    {% if users %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Weight</th>
+            <th>Goal</th>
+            <th>Intensity</th>
+            <th>Original Plan</th>
+            <th>Updated Plan</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td>{{ user.user_id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.age }}</td>
+            <td>{{ user.weight }} kg</td>
+            <td>{{ user.goal }}</td>
+            <td>{{ user.intensity }}</td>
+            <td><pre>{{ user.workout_plan or "-" }}</pre></td>
+            <td><pre>{{ user.updated_plan or "-" }}</pre></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="empty">No users yet. Generate a plan from the home page first.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

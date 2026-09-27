@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Plan - FitBuddy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #0f0f0f;
+      color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      padding: 30px 16px 60px;
+    }
+    .container { width: 100%; max-width: 720px; }
+    h1 { color: #ff5a3c; font-weight: 900; margin-bottom: 4px; }
+    .back-link { color: #999; text-decoration: none; font-size: 13px; }
+    .back-link:hover { color: #ff5a3c; }
+
+    .info-box, .plan-box, .tip-box, .feedback-box {
+      background: #1a1a1a;
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-top: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
+    .info-box h2, .plan-box h2, .tip-box h2, .feedback-box h2 {
+      margin-top: 0;
+      font-size: 18px;
+      color: #ff5a3c;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px 20px;
+      font-size: 14px;
+      color: #ddd;
+    }
+    .info-grid span.label { color: #999; }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: #eaeaea;
+      margin: 0;
+    }
+
+    .tip-box p { margin: 0; line-height: 1.6; font-size: 14.5px; }
+
+    form label {
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #ddd;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid #444;
+      background: #111;
+      color: #fff;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    textarea { min-height: 90px; resize: vertical; }
+    input:focus, textarea:focus { outline: none; border-color: #ff5a3c; }
+
+    button {
+      margin-top: 18px;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 30px;
+      background: #ff5a3c;
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button:hover { background: #e0492e; }
+
+    .confirmation {
+      margin-top: 14px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: #1f3d2b;
+      color: #7CFC9A;
+      font-size: 13.5px;
+    }
+    .error-msg {
+      margin-top: 14px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: #3d1f1f;
+      color: #ff8f8f;
+      font-size: 13.5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Your Fitness Plan</h1>
+    <a class="back-link" href="/">&larr; Back to form</a>
+
+    {% if error %}
+      <div class="error-msg">{{ error }}</div>
+    {% endif %}
+
+    {% if updated %}
+      <div class="confirmation">Your plan has been updated based on your feedback!</div>
+    {% endif %}
+
+    {% if username %}
+    <div class="info-box">
+      <h2>User Information</h2>
+      <div class="info-grid">
+        <div><span class="label">Name:</span> {{ username }}</div>
+        <div><span class="label">User ID:</span> {{ user_id }}</div>
+        <div><span class="label">Age:</span> {{ age }}</div>
+        <div><span class="label">Weight:</span> {{ weight }} kg</div>
+        <div><span class="label">Goal:</span> {{ goal }}</div>
+        <div><span class="label">Intensity:</span> {{ intensity }}</div>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="plan-box">
+      <h2>7-Day Workout Plan</h2>
+      <pre>{{ workout_plan }}</pre>
+    </div>
+
+    {% if nutrition_tip %}
+    <div class="tip-box">
+      <h2>Nutrition / Recovery Tip</h2>
+      <p>{{ nutrition_tip }}</p>
+    </div>
+    {% endif %}
+
+    <div class="feedback-box">
+      <h2>Update Your Plan</h2>
+      <form action="/submit-feedback" method="post">
+        <label for="user_id_feedback">User ID</label>
+        <input type="text" id="user_id_feedback" name="user_id" value="{{ user_id }}" required />
+
+        <label for="feedback">Feedback</label>
+        <textarea id="feedback" name="feedback" placeholder="e.g. more focus on cardio, include more rest days" required></textarea>
+
+        <button type="submit">Update Plan</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
